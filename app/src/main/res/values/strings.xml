@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Emandi2</string>
+
+    //Signing Activities
+    <string name="action_settings">Settings</string>
+    <string name="error_weak_password">weak_password</string>
+    <string name="error_invalid_email">invalid email</string>
+    <string name="error_user_exists">user exist</string>
+
+    //Drawer Activities
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

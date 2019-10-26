@@ -7,7 +7,7 @@
         android:id="@+id/view_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/add_product"
         android:textColor="@color/white"
@@ -59,12 +59,49 @@
                 android:inputType="text"
                 android:textSize="15sp"/>
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:layout_marginTop="16dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prod_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/product_description"
+                android:inputType="text"
+                android:textSize="15sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <RadioGroup
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/prod_status">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_active"
+                android:text="@string/active"
+                android:textSize="15sp"
+                android:layout_marginHorizontal="30dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_inactive"
+                android:text="@string/inactive"
+                android:textSize="15sp"
+                android:layout_marginHorizontal="30dp"/>
+
+        </RadioGroup>
         <Button
             android:id="@+id/btn_add_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="170dp"
+            android:layout_marginBottom="110dp"
             android:background="@drawable/btn_white_bg"
             android:text="@string/add_product"
             android:textColor="@color/black"

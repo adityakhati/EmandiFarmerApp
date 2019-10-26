@@ -21,7 +21,8 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText inputEmail,inputPassword,inputRePassword;private FirebaseAuth auth;
+    private EditText inputEmail,inputPassword,inputRePassword,inputName,inputLocation;
+    private FirebaseAuth auth;
     private Button btnSignUp, btnLogin;
     private ProgressDialog PD;
     @Override
@@ -45,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.username_signup);
         inputPassword = (EditText) findViewById(R.id.password_signup);
         inputRePassword = (EditText) findViewById(R.id.cpassword_signup);
+        inputName=(EditText)findViewById(R.id.name_signup);
+        inputLocation=(EditText) findViewById(R.id.location_signup);
         btnSignUp = (Button) findViewById(R.id.btn_signup);
 
 
@@ -55,9 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
                 final String email = inputEmail.getText().toString();
                 final String re_pass = inputRePassword.getText().toString();
                 final String password = inputPassword.getText().toString();
+                final String name= inputName.getText().toString();
+                final String location= inputLocation.getText().toString();
 
-
-                if (!email.equals("") && !re_pass.equals("")&& !password.equals("") ) {
+                if (!email.equals("") && !re_pass.equals("")&& !password.equals("")&& !name.equals("")&& !location.equals("")) {
 
 
                     if (password.equals(re_pass)) {
@@ -89,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         //Log.e(TAG, e.getMessage());
                                                     }
                                                 } else {
-                                                    new AddtodatabaseRegisterActivity(email);
+                                                    new AddtodatabaseRegisterActivity(email,name,location);
                                                     Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
                                                     startActivity(intent);
                                                     finish();

@@ -14,4 +14,13 @@
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="product_quantity">Product Quantity</string>
+    <string name="name">Name</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="location">Location</string>
+    <string name="product_description">Product Description</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
 </resources>

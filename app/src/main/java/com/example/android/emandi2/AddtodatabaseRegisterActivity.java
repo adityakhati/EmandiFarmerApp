@@ -22,7 +22,7 @@ public class AddtodatabaseRegisterActivity {
 
     //declare variables in oncreate
 
-    public AddtodatabaseRegisterActivity(String email){
+    public AddtodatabaseRegisterActivity(String email, String name, String location){
         //declare the database reference object. This is what we use to access the database.
         //NOTE: Unless you are signed in, this will not be useable.
         mAuth = FirebaseAuth.getInstance();
@@ -70,6 +70,8 @@ public class AddtodatabaseRegisterActivity {
             FirebaseUser user = mAuth.getCurrentUser();
             String userID = user.getUid();
             myRef.child("Users").child(userID).child("Email").setValue(email);
+            myRef.child("Users").child(userID).child("Name").setValue(name);
+            myRef.child("Users").child(userID).child("Location").setValue(location);
 
             //toastMessage("Adding " + name + " to database...");
 

@@ -9,7 +9,7 @@ android:layout_height="match_parent">
 <Button
     android:id="@+id/btn_logout"
     android:text="Logout"
-    android:textColor="#000"
+    android:textColor="@color/black"
     android:textSize="18sp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

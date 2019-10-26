@@ -4,10 +4,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_layout"
-            android:title="First Layout" />
+            android:title="Add Product" />
         <item
             android:id="@+id/nav_second_layout"
-            android:title="Second Layout" />
+            android:title="Product Details" />
         <item
             android:id="@+id/nav_third_layout"
             android:title="Third Layout" />

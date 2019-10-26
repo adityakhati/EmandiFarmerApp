@@ -37,8 +37,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new FirstFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_first_layout);
+                    new SecondFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_second_layout);
         }
     }
 
@@ -46,8 +46,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_first_layout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FirstFragment()).commit();
+                startActivity(new Intent(DashboardActivity.this,AddProductActivity.class));
                 break;
             case R.id.nav_second_layout:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

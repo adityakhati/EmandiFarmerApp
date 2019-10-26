@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/btn_login"
         android:text="LOG IN"
-        android:textColor="#fff"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
     <Button
         android:id="@+id/btn_signup"
         android:text="SIGN UP"
-        android:textColor="#000"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

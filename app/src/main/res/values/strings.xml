@@ -10,6 +10,8 @@
     //Drawer Activities
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
     <string name="add_product">Add Product</string>
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
@@ -18,11 +20,11 @@
     <string name="username">UserName</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up">Sign Up</string>
     <string name="location">Location</string>
     <string name="product_description">Product Description</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
     <string name="add_image">Add Image</string>
-    <string name="dd_mm_yyyy">DD / MM / YYYY</string>
+    <string name="dd_mm_yy">DD / MM / YY</string>
 </resources>

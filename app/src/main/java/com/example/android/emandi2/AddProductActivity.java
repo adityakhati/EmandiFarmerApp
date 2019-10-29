@@ -34,12 +34,15 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class AddProductActivity extends AppCompatActivity {
+
     private EditText inputProdName,inputProdPrice,inputProdQuantity,inputProdDescpn,inputProdDate;
+
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     ImageView mCaptureButton;
     ImageView mImageView;
     Uri image_uri;
+
     final Calendar myCalendar = Calendar.getInstance();
 
     private FirebaseAuth auth;
@@ -50,6 +53,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,13 +62,21 @@ public class AddProductActivity extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-
         auth = FirebaseAuth.getInstance();
 
-        inputProdDate=findViewById(R.id.prodDate);
+        inputStatus=(RadioGroup)findViewById(R.id.prod_status);
+        inputProdName = (EditText) findViewById(R.id.prod_name);
+        inputProdPrice= (EditText) findViewById(R.id.prod_price);
+        inputProdQuantity = (EditText) findViewById(R.id.prod_quantity);
+        inputProdDescpn = (EditText) findViewById(R.id.prod_description);
+        btnAddProd = (Button) findViewById(R.id.btn_add_product);
 
         mImageView = findViewById(R.id.camera_open);
         mCaptureButton = findViewById(R.id.camera_open);
+
+        inputProdDate=findViewById(R.id.prodDate);
+        inputStatusActive=(RadioButton) findViewById(R.id.status_active);
+        inputStatusInactive=(RadioButton) findViewById(R.id.status_inactive);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -90,8 +102,6 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-
-
         mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,14 +123,6 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-        inputStatus=(RadioGroup)findViewById(R.id.prod_status);
-        inputProdName = (EditText) findViewById(R.id.prod_name);
-        inputProdPrice= (EditText) findViewById(R.id.prod_price);
-        inputProdQuantity = (EditText) findViewById(R.id.prod_quantity);
-        inputProdDescpn = (EditText) findViewById(R.id.prod_description);
-        btnAddProd = (Button) findViewById(R.id.btn_add_product);
-        inputStatusActive=(RadioButton) findViewById(R.id.status_active);
-        inputStatusInactive=(RadioButton) findViewById(R.id.status_inactive);
         inputStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -128,6 +130,7 @@ public class AddProductActivity extends AppCompatActivity {
                 if(checkedId==R.id.status_active)
                 {
                     inputProdDate.setVisibility(View.GONE);
+                    inputProdDate.setText("");
                 }
                 else if(checkedId==R.id.status_inactive)
                 {
@@ -136,6 +139,7 @@ public class AddProductActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

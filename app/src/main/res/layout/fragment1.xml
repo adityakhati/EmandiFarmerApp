@@ -124,7 +124,7 @@
                 android:id="@+id/prodDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/dd_mm_yyyy"
+                android:hint="@string/dd_mm_yy"
                 android:inputType="text"
                 android:textSize="15sp"/>
         </com.google.android.material.textfield.TextInputLayout>

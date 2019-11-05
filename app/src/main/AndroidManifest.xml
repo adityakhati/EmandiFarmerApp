@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.emandi2">
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera.any"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
@@ -27,6 +30,7 @@
         <activity android:name=".OpeningActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AddProductActivity" />
+        <activity android:name="Products.ProductDescriptionActivity" />
 
     </application>
 

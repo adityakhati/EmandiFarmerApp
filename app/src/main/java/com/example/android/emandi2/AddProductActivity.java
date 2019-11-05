@@ -173,9 +173,10 @@ public class AddProductActivity extends AppCompatActivity {
                 final String prod_date = inputProdDate.getText().toString();
 
                 if (!prod_name.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("") && inputStatus.getCheckedRadioButtonId() == R.id.status_active) {
-                    myRef.child("Prod").child(prod_name).child(uid).child("rs").setValue(prod_price);
-                    myRef.child("Prod").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
-                    myRef.child("Prod").child(prod_name).child(uid).child("description").setValue(prod_descpn);
+                    myRef.child("Users").child(uid).child("Prod").child(prod_name).setValue("1");
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("rs").setValue(prod_price);
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("description").setValue(prod_descpn);
                     Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
                     auth = FirebaseAuth.getInstance();
                     mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -188,7 +189,7 @@ public class AddProductActivity extends AppCompatActivity {
                             // Got the download URL for 'users/me/profile.png'
                             url = uri.toString();
                             Log.d("Url", url);
-                            myRef.child("Prod").child(prod_name).child(uid).child("url").setValue(url);
+                            myRef.child("product2").child("fruits").child(prod_name).child(uid).child("url").setValue(url);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -202,10 +203,11 @@ public class AddProductActivity extends AppCompatActivity {
                     Toast.makeText(AddProductActivity.this, "Fill All Fields", Toast.LENGTH_SHORT).show();
                 }
                 if (inputStatus.getCheckedRadioButtonId() == R.id.status_inactive && !prod_date.equals("") && !prod_name.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("")) {
-                    myRef.child("Prod").child(prod_name).child(uid).child("rs").setValue(prod_price);
-                    myRef.child("Prod").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
-                    myRef.child("Prod").child(prod_name).child(uid).child("description").setValue(prod_descpn);
-                    myRef.child("Prod").child(prod_name).child(uid).child("Active Date").setValue(prod_date);
+                    myRef.child(uid).child("Prod").child(prod_name).setValue("1");
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("rs").setValue(prod_price);
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("description").setValue(prod_descpn);
+                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("Active Date").setValue(prod_date);
                     auth = FirebaseAuth.getInstance();
                     mFirebaseDatabase = FirebaseDatabase.getInstance();
                     myRef = mFirebaseDatabase.getReference();
@@ -217,7 +219,7 @@ public class AddProductActivity extends AppCompatActivity {
                             // Got the download URL for 'users/me/profile.png'
                             url = uri.toString();
                             Log.d("Url", url);
-                            myRef.child("Prod").child(prod_name).child(uid).child("url").setValue(url);
+                            myRef.child("product2").child("fruits").child(prod_name).child(uid).child("url").setValue(url);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

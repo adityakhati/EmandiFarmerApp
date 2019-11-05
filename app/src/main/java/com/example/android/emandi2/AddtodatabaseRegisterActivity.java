@@ -20,8 +20,6 @@ public class AddtodatabaseRegisterActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
-    //declare variables in oncreate
-
     public AddtodatabaseRegisterActivity(String email, String name, String location){
         //declare the database reference object. This is what we use to access the database.
         //NOTE: Unless you are signed in, this will not be useable.

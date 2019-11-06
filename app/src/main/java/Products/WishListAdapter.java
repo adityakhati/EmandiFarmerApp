@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.emandi2.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
     private Context context;
     private List<WishList> results;
     //private EditText ed_search;
-    private String rs;
+    private String rs,type;
     DatabaseReference myRef;
     FirebaseDatabase mFirebaseDatabase;
 
@@ -51,20 +52,23 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
         final WishList result = results.get(position);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        final String key1 = result.key;
-        final String child1 = result.child;
-        Log.d("Child",child1);
-        Log.d("key",key1);
+        final String prod = result.key;
+        final String name = result.child;
+        Log.d("key", name);
 
-        holder.textViewName.setText(key1);
+        holder.textViewName.setText(prod);
+        holder.textViewFarmerName.setText(name);
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                rs = dataSnapshot.child("Prod").child(key1).child(child1).child("rs").getValue().toString();
-                String url = dataSnapshot.child("Prod").child(key1).child(child1).child("url").getValue().toString();
+                type = dataSnapshot.child("Users").child(FirebaseAuth.getInstance().getUid()).child("Prod").child(prod).getValue().toString();
+                Log.d("type", type);
+                String rs = dataSnapshot.child("product2").child(type).child(prod).child(name).child("rs").getValue().toString();
+                String url = dataSnapshot.child("product2").child(type).child(prod).child(name).child("url").getValue().toString();
                 Picasso.get().load(url).into(holder.imageViewProd);
-                holder.textViewRupees.setText("Rs. "+rs);
+                holder.textViewRupees.setText(rs);
+
             }
 
             @Override
@@ -75,13 +79,50 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProductDescriptionActivity.class);
-                intent.putExtra("farmer", child1);
-                intent.putExtra("prod", key1);
-                context.startActivity(intent);
+                myRef = mFirebaseDatabase.getReference();
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        type = dataSnapshot.child("Users").child(FirebaseAuth.getInstance().getUid()).child("Prod").child(prod).getValue().toString();
+                        Intent intent = new Intent(context, ProductDescriptionActivity.class);
+                        intent.putExtra("type", type);
+                        intent.putExtra("farmer", name);
+                        intent.putExtra("prod", prod);
+                        context.startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+
+
+                //readData(prod,name);
             }
         });
     }
+
+
+    private void readData( final String name, final String prod) {
+
+        myRef = mFirebaseDatabase.getReference();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                type = dataSnapshot.child("Users").child(FirebaseAuth.getInstance().getUid()).child("Prod").child(prod).getValue().toString();
+                Intent intent = new Intent(context, ProductDescriptionActivity.class);
+                intent.putExtra("type", type);
+                intent.putExtra("farmer", name);
+                intent.putExtra("prod", prod);
+                context.startActivity(intent);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
 
     @Override
     public int getItemCount() {

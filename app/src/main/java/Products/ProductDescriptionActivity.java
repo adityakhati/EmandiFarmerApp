@@ -33,22 +33,25 @@ public class ProductDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_description);
-
         Intent intent = getIntent();
         final String name = intent.getStringExtra("farmer");
         final String prod = intent.getStringExtra("prod");
+        final String type = intent.getStringExtra("type");
+
 
         textViewRs = findViewById(R.id.tv_prod_rs);
-        textViewName = findViewById(R.id.tv_prod_name);
-        textViewSold = findViewById(R.id.tv_units_sold);
-        imageViewProd = findViewById(R.id.img_product);
         textViewUnits = findViewById(R.id.tv_prod_units);
         textViewDes=findViewById(R.id.tv_prod_descp);
+        textViewName = findViewById(R.id.tv_prod_name);
+        textViewSold=findViewById(R.id.tv_units_sold);
+        imageViewProd = findViewById(R.id.img_product);
+
+
 
         textViewName.setText(prod.toUpperCase());
 
         auth = FirebaseAuth.getInstance();
-
+        final String uid = auth.getUid();
 
         findViewById(R.id.tv_arrow_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,37 @@ public class ProductDescriptionActivity extends AppCompatActivity {
             }
         });
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String rs = dataSnapshot.child("product2").child(type).child(prod).child(name).child("rs").getValue().toString();
+                String units = dataSnapshot.child("product2").child(type).child(prod).child(name).child("kg").getValue().toString();
+                String url = dataSnapshot.child("product2").child(type).child(prod).child(name).child("url").getValue().toString();
+                String des = dataSnapshot.child("product2").child(type).child(prod).child(name).child("description").getValue().toString();
+                Picasso.get().load(url).into(imageViewProd);
+
+                if(dataSnapshot.child("product2").child(type).child(prod).child(name).child("sold").exists()){
+                    textViewSold.setText(dataSnapshot.child("product2").child(type).child(prod).child(name).child("sold").getValue().toString()+"Kg");
+                }
+                else {
+                    textViewSold.setText("0 Kg");
+                }
+
+                textViewRs.setText("Rs. " + rs);
+                textViewUnits.setText(units+" Kg");
+                textViewDes.setText(des);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+/*
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,6 +119,7 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
     }

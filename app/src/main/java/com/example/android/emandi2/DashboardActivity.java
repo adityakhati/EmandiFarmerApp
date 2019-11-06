@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import Categories.CategoriesFragment;
 import Products.WishListFragment;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,16 +48,19 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_first_layout:
-                startActivity(new Intent(DashboardActivity.this,AddProductActivity.class));
+            case R.id.nav_third_layout:
                 break;
             case R.id.nav_second_layout:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WishListFragment()).commit();
                 break;
-            case R.id.nav_third_layout:
+            case R.id.nav_first_layout:
+                Bundle bundle = new Bundle();
+                bundle.putString("edttext", "Activity");
+                CategoriesFragment fragobj = new CategoriesFragment();
+                fragobj.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ThirdFragment()).commit();
+                        fragobj).commit();
                 break;
             case R.id.nav_logout:
                 logout();

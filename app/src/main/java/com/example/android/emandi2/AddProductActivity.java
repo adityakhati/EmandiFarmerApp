@@ -46,7 +46,7 @@ import java.util.Random;
 
 public class AddProductActivity extends AppCompatActivity {
 
-    private EditText inputProdName, inputProdPrice, inputProdQuantity, inputProdDescpn, inputProdDate;
+    private EditText inputProdPrice, inputProdQuantity, inputProdDescpn, inputProdDate;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -57,7 +57,7 @@ public class AddProductActivity extends AppCompatActivity {
     int random;
 
     ImageView img_upload_btn, img_profile_pic;
-    String url, uid;
+    String url, uid,type,prod;
 
     Bitmap photo;
     private static final int CAMERA_REQ = 1;
@@ -79,12 +79,15 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment1);
 
+        Intent intent=getIntent();
+        type=intent.getStringExtra("type");
+        prod=intent.getStringExtra("prod");
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
         auth = FirebaseAuth.getInstance();
 
         inputStatus = (RadioGroup) findViewById(R.id.prod_status);
-        inputProdName = (EditText) findViewById(R.id.prod_name);
         inputProdPrice = (EditText) findViewById(R.id.prod_price);
         inputProdQuantity = (EditText) findViewById(R.id.prod_quantity);
         inputProdDescpn = (EditText) findViewById(R.id.prod_description);
@@ -166,68 +169,34 @@ public class AddProductActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 final String uid = FirebaseAuth.getInstance().getUid();
-                final String prod_name = inputProdName.getText().toString();
                 final String prod_price = inputProdPrice.getText().toString();
                 final String prod_quantity = inputProdQuantity.getText().toString();
                 final String prod_descpn = inputProdDescpn.getText().toString();
                 final String prod_date = inputProdDate.getText().toString();
 
-                if (!prod_name.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("") && inputStatus.getCheckedRadioButtonId() == R.id.status_active) {
-                    myRef.child("Users").child(uid).child("Prod").child(prod_name).setValue("1");
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("rs").setValue(prod_price);
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("description").setValue(prod_descpn);
+                if ( !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("") && inputStatus.getCheckedRadioButtonId() == R.id.status_active) {
+                    myRef.child("Users").child(uid).child("Prod").child(prod).setValue(type);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("rs").setValue(prod_price);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("kg").setValue(prod_quantity);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("description").setValue(prod_descpn);
                     Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
-                    auth = FirebaseAuth.getInstance();
-                    mFirebaseDatabase = FirebaseDatabase.getInstance();
-                    myRef = mFirebaseDatabase.getReference();
-                    String imgref = "User/" + FirebaseAuth.getInstance().getUid() + "/" + random;
-                    StorageReference ref = FirebaseStorage.getInstance().getReference();
-                    ref.child(imgref).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            // Got the download URL for 'users/me/profile.png'
-                            url = uri.toString();
-                            Log.d("Url", url);
-                            myRef.child("product2").child("fruits").child(prod_name).child(uid).child("url").setValue(url);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });
-                    Intent intent = new Intent(AddProductActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(AddProductActivity.this, AddProductActivity2.class);
+                    intent.putExtra("type",type);
+                    intent.putExtra("prod",prod);
                     startActivity(intent);
                 } else {
                     Toast.makeText(AddProductActivity.this, "Fill All Fields", Toast.LENGTH_SHORT).show();
                 }
-                if (inputStatus.getCheckedRadioButtonId() == R.id.status_inactive && !prod_date.equals("") && !prod_name.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("")) {
-                    myRef.child(uid).child("Prod").child(prod_name).setValue("1");
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("rs").setValue(prod_price);
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("kg").setValue(prod_quantity);
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("description").setValue(prod_descpn);
-                    myRef.child("product2").child("fruits").child(prod_name).child(uid).child("Active Date").setValue(prod_date);
-                    auth = FirebaseAuth.getInstance();
-                    mFirebaseDatabase = FirebaseDatabase.getInstance();
-                    myRef = mFirebaseDatabase.getReference();
-                    String imgref = "User/" + FirebaseAuth.getInstance().getUid() + "/" + random;
-                    StorageReference ref = FirebaseStorage.getInstance().getReference();
-                    ref.child(imgref).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            // Got the download URL for 'users/me/profile.png'
-                            url = uri.toString();
-                            Log.d("Url", url);
-                            myRef.child("product2").child("fruits").child(prod_name).child(uid).child("url").setValue(url);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
-                    });Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddProductActivity.this, DashboardActivity.class);
+                if (inputStatus.getCheckedRadioButtonId() == R.id.status_inactive && !prod_date.equals("") && !prod.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("")) {
+                    myRef.child(uid).child("Prod").child(prod).setValue("1");
+                    myRef.child("product2").child(type).child(prod).child(uid).child("rs").setValue(prod_price);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("kg").setValue(prod_quantity);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("description").setValue(prod_descpn);
+                    myRef.child("product2").child(type).child(prod).child(uid).child("Active Date").setValue(prod_date);
+                    Toast.makeText(AddProductActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AddProductActivity.this, AddProductActivity2.class);
+                    intent.putExtra("type",type);
+                    intent.putExtra("prod",prod);
                     startActivity(intent);
                 } else {
                     Toast.makeText(AddProductActivity.this, "Fill All Fields", Toast.LENGTH_SHORT).show();

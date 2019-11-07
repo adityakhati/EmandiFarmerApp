@@ -29,4 +29,5 @@
     <string name="inactive">Inactive</string>
     <string name="add_image">Add Image</string>
     <string name="dd_mm_yy">DD / MM / YY</string>
+    <string name="forgot_password">Forgot Password</string>
 </resources>

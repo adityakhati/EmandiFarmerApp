@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
+import android.view.inputmethod.InputMethodManager;
 
 public class AddProductActivity extends AppCompatActivity {
 
@@ -124,16 +127,23 @@ public class AddProductActivity extends AppCompatActivity {
             }
         };
 
-        inputProdDate.setOnTouchListener(new View.OnTouchListener() {
+        inputProdDate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(AddProductActivity.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                return false;
+            public void onClick(View view) {
+                new DatePickerDialog(AddProductActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+//        inputProdDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                // TODO Auto-generated method stub
+//                new DatePickerDialog(AddProductActivity.this, date, myCalendar
+//                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//                return false;
+//            }
+//        });
 
 /*        mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +184,7 @@ public class AddProductActivity extends AppCompatActivity {
                 final String prod_descpn = inputProdDescpn.getText().toString();
                 final String prod_date = inputProdDate.getText().toString();
 
-                if ( !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("") && inputStatus.getCheckedRadioButtonId() == R.id.status_active) {
+                if ( !prod_price.equals("") && !prod_quantity.equals("") && !prod_descpn.equals("") && inputStatus.getCheckedRadioButtonId() == R.id.status_active) {
                     myRef.child("Users").child(uid).child("Prod").child(prod).setValue(type);
                     myRef.child("product2").child(type).child(prod).child(uid).child("rs").setValue(prod_price);
                     myRef.child("product2").child(type).child(prod).child(uid).child("kg").setValue(prod_quantity);
@@ -184,11 +194,9 @@ public class AddProductActivity extends AppCompatActivity {
                     intent.putExtra("type",type);
                     intent.putExtra("prod",prod);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(AddProductActivity.this, "Fill All Fields", Toast.LENGTH_SHORT).show();
                 }
-                if (inputStatus.getCheckedRadioButtonId() == R.id.status_inactive && !prod_date.equals("") && !prod.equals("") && !prod_price.equals(uid) && !prod_quantity.equals("") && !prod_descpn.equals("")) {
-                    myRef.child(uid).child("Prod").child(prod).setValue("1");
+                else if (inputStatus.getCheckedRadioButtonId() == R.id.status_inactive && !prod_date.equals("") && !prod.equals("") && !prod_price.equals("") && !prod_quantity.equals("") && !prod_descpn.equals("")) {
+                    myRef.child("Users").child(uid).child("Prod").child(prod).setValue(type);
                     myRef.child("product2").child(type).child(prod).child(uid).child("rs").setValue(prod_price);
                     myRef.child("product2").child(type).child(prod).child(uid).child("kg").setValue(prod_quantity);
                     myRef.child("product2").child(type).child(prod).child(uid).child("description").setValue(prod_descpn);
@@ -198,13 +206,13 @@ public class AddProductActivity extends AppCompatActivity {
                     intent.putExtra("type",type);
                     intent.putExtra("prod",prod);
                     startActivity(intent);
-                } else {
+                }
+                else {
                     Toast.makeText(AddProductActivity.this, "Fill All Fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
     private void updateLabel() {
         String myFormat = "dd/MM/yy";

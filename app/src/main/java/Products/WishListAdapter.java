@@ -68,12 +68,10 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
                 String url = dataSnapshot.child("product2").child(type).child(prod).child(name).child("url").getValue().toString();
                 Picasso.get().load(url).into(holder.imageViewProd);
                 holder.textViewRupees.setText(rs);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         holder.parentlayout.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +120,6 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
             public void onCancelled(DatabaseError databaseError) {}
         });
     }
-
 
     @Override
     public int getItemCount() {

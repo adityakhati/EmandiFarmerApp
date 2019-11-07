@@ -114,7 +114,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/dd_mm_yy"
                 android:inputType="text"
-                android:textSize="15sp"/>
+                android:textSize="15sp"
+                android:focusableInTouchMode="false"
+                android:focusable="false"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/btn_add_product"

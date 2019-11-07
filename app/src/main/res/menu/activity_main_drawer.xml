@@ -10,7 +10,7 @@
             android:title="Product Details" />
         <item
             android:id="@+id/nav_third_layout"
-            android:title="Third Layout" />
+            android:title="Settings" />
     </group>
 
 

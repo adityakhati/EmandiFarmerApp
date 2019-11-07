@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="16dp">
+    android:layout_marginVertical="16dp"
+    android:background="#E8E8EA">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_wishlist"

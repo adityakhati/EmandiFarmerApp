@@ -57,7 +57,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
         Log.d("key", name);
 
         holder.textViewName.setText(prod);
-        holder.textViewFarmerName.setText(name);
+        //holder.textViewFarmerName.setText(name);
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,7 +67,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
                 String rs = dataSnapshot.child("product2").child(type).child(prod).child(name).child("rs").getValue().toString();
                 String url = dataSnapshot.child("product2").child(type).child(prod).child(name).child("url").getValue().toString();
                 Picasso.get().load(url).into(holder.imageViewProd);
-                holder.textViewRupees.setText(rs);
+                holder.textViewRupees.setText("Rs. "+rs);
             }
 
             @Override
@@ -129,13 +129,14 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.Artist
 
     class ArtistViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewName, textViewRupees,textViewFarmerName;
+        TextView textViewName, textViewRupees;
+        //textViewFarmerName;
         LinearLayout parentlayout;
         ImageView imageViewProd;
 
         public ArtistViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewFarmerName=itemView.findViewById(R.id.tv_units_sold);
+            //textViewFarmerName=itemView.findViewById(R.id.tv_units_sold);
             textViewName = itemView.findViewById(R.id.tv_prod_name);
             parentlayout = itemView.findViewById(R.id.ll_parent_layout);
             textViewRupees = itemView.findViewById(R.id.tv_prod_rs);

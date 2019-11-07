@@ -1,5 +1,6 @@
 package Categories;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.emandi2.AddProductActivity;
 import com.example.android.emandi2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -100,6 +102,19 @@ public class CategoriesFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        view.findViewById(R.id.add_new_prod).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String prod_name=ed_search.getText().toString();
+                Intent intent =new Intent(getContext(), AddProductActivity.class);
+                intent.putExtra("prod", prod_name);
+                intent.putExtra("type", strtext);
+                startActivity(intent);
+
 
             }
         });

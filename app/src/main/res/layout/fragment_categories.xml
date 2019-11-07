@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:layout_marginHorizontal="16dp">
 
 
     <EditText
@@ -10,7 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search"
-        android:layout_marginHorizontal="16dp"/>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:background="@drawable/dt_rect"
+        android:drawablePadding="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="16dp"
@@ -18,4 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/add_new_prod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add New Product"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_blue_bg"
+        />
 </LinearLayout>

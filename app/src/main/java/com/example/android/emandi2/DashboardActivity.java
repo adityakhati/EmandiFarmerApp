@@ -40,8 +40,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new SecondFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_third_layout);
+                    new WishListFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_second_layout);
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    private Button btnSignUp, btnLogin;
+    private Button btnLogin;
+    private TextView btnSignUp;
     private ProgressDialog PD;
 
     @Override
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         inputEmail = (TextInputEditText) findViewById(R.id.username_login);
         inputPassword = (TextInputEditText) findViewById(R.id.password_login);
-        btnSignUp = (Button) findViewById(R.id.btn_signup);
+        btnSignUp = (TextView) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
 
         // Validating Login Credits with Firebase

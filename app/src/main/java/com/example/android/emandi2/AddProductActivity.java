@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -47,7 +48,7 @@ import java.util.Locale;
 import java.util.Random;
 import android.view.inputmethod.InputMethodManager;
 
-public class AddProductActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity{
 
     private EditText inputProdPrice, inputProdQuantity, inputProdDescpn, inputProdDate;
 
@@ -85,6 +86,9 @@ public class AddProductActivity extends AppCompatActivity {
         Intent intent=getIntent();
         type=intent.getStringExtra("type");
         prod=intent.getStringExtra("prod");
+
+        Log.d("Prod",prod);
+        Log.d("type",type);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();

@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="16dp"
+    android:background="@drawable/login">
 
-    <TextView
-        android:id="@+id/view_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="LOG IN"
-        android:textColor="@color/white"
-        android:textSize="25sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:orientation="vertical">
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:paddingLeft="16dp"
+            android:textColorHint="@color/black"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="UserName"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,11 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
+            android:textColorHint="@color/black"
             android:layout_marginTop="16dp" >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
                 android:hint="Password"
                 android:textSize="15sp"
                 android:inputType="textPassword"/>
@@ -60,13 +58,13 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/btn_blue_bg"
             android:text="LOG IN"
             android:textColor="#000"
             android:textSize="15sp"/>
 
-        <Button
+        <TextView
             android:id="@+id/btn_signup"
             android:text="SIGN UP"
             android:textColor="#000"
@@ -74,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_white_bg"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"/>
     </LinearLayout>
 </RelativeLayout>
